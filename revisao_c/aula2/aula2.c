@@ -44,38 +44,77 @@ Nome: Carone, Estoque Total: 184500
 
 typedef struct
 {
-    char *nomeItem;
+    char *nomeProduto;
     int valor;
+}tProduto;
+
+tProduto *AdicionaProduto()
+{
+    tProduto *produto = malloc(sizeof(tProduto));
+
+    printf("Digite o nome do produto:");
+    char temp[100];
+    scanf("%[^\n]", temp);
+    produto->nomeProduto = strdup(temp);
+
+    printf("Digite valor:");
+    scanf("%d", produto->valor);
+    return produto;
+}
+
+tProduto *AchaProduto(char *nome, tProduto **listaProduto, int tamanhoLista)
+{
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        if (nome, listaProduto[i])
+        {
+            return listaProduto[i];
+        }
+    }
+    return NULL;
+}
+
+void DesalocaProduto(tProduto *produto)
+{   
+    if (produto)
+    {
+        if (produto->nomeProduto)
+        {
+            free(produto->nomeProduto);
+        }
+        free(produto);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef struct
+{
+    tProduto *produto;
     int qnt;
 }tItem;
 
 void ImprimeItem(tItem *item)
 {
-    printf("\t\t\tItem: %s, valor unitário: %d, quantidade: %d\n", item->nomeItem, item->valor, item->qnt);
+    printf("\t\t\tItem: %s, valor unitário: %d, quantidade: %d\n", item->produto->nomeProduto, item->produto->valor, item->qnt);
 }
 
-tItem *AdicionaItem()
+tItem *AdicionaItem(tProduto **listaProduto)
 {
     tItem *item = malloc(sizeof(tItem));
 
     printf("Digite o nome do produto:");
-    char temp[100];
-    scanf("%[^\n]", temp);
-    item->nomeItem = strdup(temp);
-    
-    printf("Digite o valor e a qnt:");
-    scanf("%d %d", item->valor, item->qnt);
-    return item;
+    char nome[100];
+    scanf("%[^\n]", nome);
 
+    item->produto = AchaProduto(nome, listaProduto, tamanhoLista);
+
+    printf("Digite qnt:");
+    scanf("%d", item->qnt);
+    return item;
 }
 
 void DesalocaItem(tItem *item)
-{
-    if (item->nomeItem)
-    {
-        free(item->nomeItem);
-    }
-    
+{   
     if (item)
     {
         free(item);
@@ -97,11 +136,11 @@ void ImprimeFilial(tFilial *filial)
     printf("\t\tEstoque: %d\n", filial->estoqueFilal);
     for (int i = 0; i < filial->qntItems; i++)
     {
-        Imprimeitem(filial->item);
+        ImprimeItem(filial->item[i]);
     }
 }
 
-tFilial *AdicionaFilial(tFilial *filial)
+tFilial *AdicionaFilial(tProduto *listaProduto)
 {
     tFilial *filial = malloc(sizeof(tFilial));
     filial->item = malloc(10 * sizeof(tItem*));
@@ -123,13 +162,13 @@ tFilial *AdicionaFilial(tFilial *filial)
             break;
         }
         
-        filial->item[i] = AdicionaItem();
+        filial->item[i] = AdicionaItem(listaProduto);
         filial->qntItems++;
     }
     return filial;
 }
 
-tFilial *DesalocaFilial(tFilial *filial)
+void DesalocaFilial(tFilial *filial)
 {
     if (filial->nomeFilial)
     {
@@ -150,12 +189,21 @@ tFilial *DesalocaFilial(tFilial *filial)
     }
 }
 
+void CaculaEstoqueFilial(tFilial *filial)
+{
+    for (int i = 0; i < filial->qntItems; i++)
+    {
+        filial->estoqueFilal += filial->item[i]->produto->valor * filial->item[i]->qnt;
+    }
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct 
 {
     char *nomeMercado;
     int estoque;
-    tFilial *filial;
+    tFilial **filial;
     int qntFilias;
 }tMercado;
 
@@ -169,13 +217,71 @@ void ImprimeMercado(tMercado *mercado)
 }
 
 
+tMercado *AdicionaMercado(tProduto *listaProduto)
+{
+    tMercado *mercado = malloc(sizeof(tMercado));
+
+    printf("Digite o nome da mercado:");
+    char temp[100];
+    scanf("%[^\n]", temp);
+    mercado->nomeMercado = strdup(temp);
+    mercado->qntFilias = 0;
+    mercado->estoque = 0;
+    int i = 0;
+    while (1)
+    {
+        char car;
+        printf("Deseja adicionar uma filial? (s/n):)");
+        scanf("%c", &car); 
+        if (car == 'n')
+        {
+            break;
+        }
+        
+        mercado->filial[i] = AdicionaFilial(listaProduto);
+        mercado->qntFilias++;
+    }
+    return mercado;
+}
+
+void CaculaEstoqueMercado(tMercado *mercado)
+{
+    for (int i = 0; i < mercado->qntFilias; i++)
+    {
+        mercado->estoque += mercado->filial[i]->estoqueFilal;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+tProduto *AdicionaListaProdutos(tProduto **listaProduto, int tamanhoLista)
+{
+    int i = 0;
+    while (1)
+    {
+        char car;
+        printf("Deseja adicionar um produto? (s/n):)");
+        scanf("%c", &car); 
+        if (car == 'n')
+        {
+            break;
+        }
+        
+        listaProduto[i] = AdicionaProduto();
+    }
+    tamanhoLista = i;
+}
 
 int main()
 {
+    int tamanhoLista = 0;
+    tProduto **listaProduto = malloc(10 * sizeof(tProduto));
+    
+    AdicionaListaProdutos(listaProduto, tamanhoLista);
 
+    tMercado *mercado = AdicionaMercado(listaProduto);
 
-
+    ImprimeMercado(mercado);
 
     return 0;
 }
