@@ -5,7 +5,7 @@ compila:
 	gcc -o main *.o
 
 testa: compila
-	valgrind ./aula3 < input.txt --leak-check=ful
+	valgrind ./main --leak-check=ful
 
 clean:
 	rm *.o main

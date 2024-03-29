@@ -127,13 +127,11 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2)
     {
         Matriz *resultado = inicializaMatriz(recuperaNLinhas(mat1), recuperaNColunas(mat2));
 
-        int soma = 0;
-
-        for (int i = 0; i < recuperaNLinhas(mat2); i++)
+        for (int i = 0; i < recuperaNLinhas(mat1); i++)
         {
-            for (int j = 0; j < recuperaNColunas(mat1); j++)
+            for (int j = 0; j < recuperaNColunas(mat2); j++)
             {
-                soma = 0;
+                int soma = 0;
                 for (int k = 0; k < recuperaNColunas(mat1); k++)
                 {
                     soma += mat1->elemento[i][k] * mat2->elemento[k][j];
@@ -143,6 +141,7 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2)
         }
         return resultado;
     }
+    return NULL;
 }
 
 /*Imprime a matriz
