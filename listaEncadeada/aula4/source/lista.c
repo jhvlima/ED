@@ -47,6 +47,11 @@ void *RetiraListaNome(char *nome, tLista *listaProduto)
 
 }
 
+void *RetiraListaCodigo(int codigo, tLista *listaProduto)
+{
+
+}
+
 void DesalocaLista(tLista *lista)
 {
     // o segundo node vira o inico da lista e libera o antigo primeiro

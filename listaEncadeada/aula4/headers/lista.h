@@ -1,6 +1,10 @@
+#ifndef LISTA_H
+#define LISTA_H
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "../headers/produto.h"
 
 typedef struct _tLista tLista;
 
@@ -17,3 +21,5 @@ void *RetiraListaNome(char *nome, tLista *listaProduto);
 void DesalocaLista(tLista *lista);
 
 void *ImprimeLista(tLista *lista);
+
+#endif

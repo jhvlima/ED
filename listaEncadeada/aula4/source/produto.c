@@ -7,6 +7,24 @@ typedef struct _tProduto
     int codigo;
 } tProduto;
 
+tProduto **CriaListaProdutos(int tamanhoLista)
+{
+    tProduto **listaProdutos = malloc(sizeof(tProduto) * tamanhoLista);
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        listaProdutos[i] = AdicionaProduto(); 
+    }
+    return listaProdutos;
+}
+
+void DesalocaListaProdutos(tProduto **lista, int tamanhoLista)
+{
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        DesalocaProduto(lista[i]); 
+    }
+    free(lista);
+}
 
 tProduto *AdicionaProduto()
 {
@@ -20,6 +38,10 @@ tProduto *AdicionaProduto()
 
     printf("Digite valor: ");
     scanf("%d", &produto->valor);
+    scanf("%*c");
+    
+    printf("Digite codigo: ");
+    scanf("%d", &produto->codigo);
     scanf("%*c");
     return produto;
 }
@@ -46,4 +68,19 @@ void DesalocaProduto(tProduto *produto)
         }
         free(produto);
     }
+}
+
+int ObtemValorProduto(tProduto *p)
+{
+    return p->valor;
+}
+
+int ObtemCodigpProduto(tProduto *p)
+{
+    return p->codigo;
+}
+
+char *ObtemNomeProduto(tProduto *p)
+{
+    return p->nomeProduto;
 }

@@ -1,7 +1,7 @@
 all: testa
 
 compila:
-	cd objects/ && gcc -c source/*.c
+	cd objects/ && gcc -c ../source/*.c
 	gcc -o main objects/*.o
 
 testa: compila
