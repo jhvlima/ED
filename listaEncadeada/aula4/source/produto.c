@@ -9,7 +9,7 @@ typedef struct _tProduto
 
 tProduto **CriaListaProdutos(int tamanhoLista)
 {
-    tProduto **listaProdutos = malloc(sizeof(tProduto) * tamanhoLista);
+    tProduto **listaProdutos = malloc(sizeof(tProduto*) * tamanhoLista);
     for (int i = 0; i < tamanhoLista; i++)
     {
         listaProdutos[i] = AdicionaProduto(); 
@@ -75,7 +75,7 @@ int ObtemValorProduto(tProduto *p)
     return p->valor;
 }
 
-int ObtemCodigpProduto(tProduto *p)
+int ObtemCodigoProduto(tProduto *p)
 {
     return p->codigo;
 }
@@ -83,4 +83,9 @@ int ObtemCodigpProduto(tProduto *p)
 char *ObtemNomeProduto(tProduto *p)
 {
     return p->nomeProduto;
+}
+
+void ImprimeProduto(tProduto *p)
+{
+    printf("\tProduto: %s, valor unitário: %d, codigo: %d\n", ObtemNomeProduto(p), ObtemValorProduto(p), ObtemCodigoProduto(p));
 }

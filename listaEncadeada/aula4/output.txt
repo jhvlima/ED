@@ -1,0 +1,23 @@
+==1649== Memcheck, a memory error detector
+==1649== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1649== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1649== Command: ./main --leak-check=ful
+==1649== 
+Quantos produtos desaja cadastrar?: Digite o nome do produto: Digite valor: Digite codigo: Digite o nome do produto: Digite valor: Digite codigo: Digite o nome do produto: Digite valor: Digite codigo: Digite o nome do produto: Digite valor: Digite codigo: Digite o nome do produto: Digite valor: Digite codigo: Lista de produtos completa:
+	Produto: leite desnatado, valor unitário: 5, codigo: 1234
+	Produto: arroz 5kg, valor unitário: 30, codigo: 4321
+	Produto: agua mineral, valor unitário: 2, codigo: 987
+	Produto: queijo fatiado 1kg, valor unitário: 60, codigo: 7890
+	Produto: carne 1kg, valor unitário: 50, codigo: 1010
+Lista de produtos alterada:
+	Produto: arroz 5kg, valor unitário: 30, codigo: 4321
+	Produto: queijo fatiado 1kg, valor unitário: 60, codigo: 7890
+==1649== 
+==1649== HEAP SUMMARY:
+==1649==     in use at exit: 0 bytes in 0 blocks
+==1649==   total heap usage: 19 allocs, 19 frees, 8,476 bytes allocated
+==1649== 
+==1649== All heap blocks were freed -- no leaks are possible
+==1649== 
+==1649== For lists of detected and suppressed errors, rerun with: -s
+==1649== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

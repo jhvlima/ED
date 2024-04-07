@@ -1,19 +1,16 @@
 5
 leite desnatado
 5
+1234
 arroz 5kg
 30
+4321
 agua mineral
 2
+0987
 queijo fatiado 1kg
 60
+7890
 carne 1kg
 50
-epa
-1
-itapoa
-2
-leite desnatado
-10
-agua mineral
-5
+1010

@@ -15,12 +15,14 @@ void DesalocaProduto(tProduto *produto);
 
 int ObtemValorProduto(tProduto *p);
 
-int ObtemCodigpProduto(tProduto *p);
+int ObtemCodigoProduto(tProduto *p);
 
 char *ObtemNomeProduto(tProduto *p);
 
 void DesalocaListaProdutos(tProduto **lista, int tamanhoLista);
 
 tProduto **CriaListaProdutos(int tamanhoLista);
+
+void ImprimeProduto(tProduto *p);
 
 #endif

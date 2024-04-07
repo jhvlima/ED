@@ -18,8 +18,11 @@ void *InsereLista(tLista *lista, tProduto *produto);
 
 void *RetiraListaNome(char *nome, tLista *listaProduto);
 
+void *RetiraListaCodigo(int codigo, tLista *listaProduto);
+
 void DesalocaLista(tLista *lista);
 
 void *ImprimeLista(tLista *lista);
+
 
 #endif

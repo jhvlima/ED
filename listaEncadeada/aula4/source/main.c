@@ -6,70 +6,40 @@ Tarefas:
 3) Implementar um testador (com a main) para testar a sua implementação.
 */
 
-/* AULA 1
-Hoje faremos um exercício com objetivo de treinar alocação dinâmica de: vetores, strings e structs.
-
-Faremos uma simulação bem simplificada de uma rede de filiais de um supermercado e a presença de produtos em algumas filiais.
-
-Dados de entrada podem ser definidos pelo usuário ou pela entrada padrão...
-
-Informações sobre o domínio do problema:
-
-- Um Supermercado tem um nome, um vetor de filiais e um valor total do estoque;
-- Uma filial tem um nome e um estoque;
-- Um estoque tem um valor e um vetor de items de estoque;
-- Um item de estoque tem um quantidade e está relacionado ao um tipo de produto;
-- Um tipo de produto tem um nome e um valor.
-
-
-A dinâmica do programa se resume no seguinte:
-
-- cadastrar tipos de produtos
-- alocar um supermercado
-- alocar filiais para este supermercado
-- alocar items de estoque para cada filial (associar o produto pré cadastrado a uma quantidade)
-- calcular o estoque da filial
-- calcular o estoque do supermercado
-- imprimir todas as informações relativas ao supermercado, por exemplo:
-
-
-Nome: Carone, Estoque Total: 184500
-             Filial: Jardim Camburi
-             Estoque: 23000
-                 Item: Leite Integral Selita, valor unitário: 10, quantidade: 200
-                 Item: Presunto de Parma, valor unitário: 50, quantidade: 300
-                 Item: Queijo, valor unitário: 30, quantidade: 200
-             Filial: Jardim da Penha
-             Estoque: 161500
-                 Item: Biscoito, valor unitário: 5, quantidade: 2000
-                 Item: Presunto de Parma, valor unitário: 50, quantidade: 3000
-                 Item: Carne de Sol, valor unitário: 30, quantidade: 50
-*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "../headers/produto.h"
-#include "../headers/mercado.h"
-#include "../headers/filial.h"
 #include "../headers/lista.h"
 
 int main()
 {
-    // lista de produtos 
+    // lista de tProduto
     int tamanhoLista = 0;
     printf("Quantos produtos desaja cadastrar?: ");
     scanf("%d", &tamanhoLista);
     scanf("%*c");
     tProduto **listaProdutos = CriaListaProdutos(tamanhoLista);
 
-    tMercado *mercado = AdicionaMercado(listaProdutos, tamanhoLista);
+    // tLista de produtos
+    tLista *listaEncadeada = CriaLista();
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        InsereLista(listaEncadeada, listaProdutos[i]);
+    }
 
-    CaculaEstoqueMercado(mercado);
+    // teste de funcionamento
+    printf("Lista de produtos completa:\n");
+    ImprimeLista(listaEncadeada);
 
-    ImprimeMercado(mercado);
+    RetiraListaNome("agua mineral", listaEncadeada);
+    RetiraListaCodigo(1234, listaEncadeada);
+    RetiraListaCodigo(1010, listaEncadeada);
 
-    DesalocaMercado(mercado);
+    printf("Lista de produtos alterada:\n");
+    ImprimeLista(listaEncadeada);
 
+    DesalocaLista(listaEncadeada);
     DesalocaListaProdutos(listaProdutos, tamanhoLista);
 
     return 0;
