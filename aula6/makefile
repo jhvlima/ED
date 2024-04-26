@@ -5,4 +5,10 @@ compila: clean
 # compila *.c para *.o
 	gcc -c *.c
 # compila *.o para executavel
-	gcc -o $(NOME) Testador1.o $(OBJETOS)
+	gcc -o $(NOME) *.o
+
+testa: compila
+	valgrind ./$(NOME)
+
+clean:
+	rm -f *.o $(NOME)

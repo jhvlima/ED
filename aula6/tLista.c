@@ -1,11 +1,19 @@
+#include "tGato.h"
+#include "tCachorro.h"
 #include "tLista.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+union tAnimal
+{
+    tCachorro *cachorro;
+    tGato *gato;
+}tAnimal;
+
 typedef struct _tCelula 
 {
-    void* animal;
+    union tAnimal;
     tCelula *proximaCelula;
     tCelula *anteriorCelula;
 }tCelula;
@@ -20,7 +28,7 @@ typedef struct _tLista
 tLista *CriaLista()
 {
     tLista *lista = malloc(sizeof(tLista));
-    lista->primeiroNode = lista->ultimoNode = NULL;
+    lista->primeiraCelula = lista->ultimaCelula = NULL;
     return lista;
 }
 
@@ -32,26 +40,30 @@ void InsereLista(tLista *lista, void *animal)
         printf("Animal inexistente\n");
     }
 
-    tCelula *novoNode = malloc(sizeof(tNode));
+    tCelula *novoNode = malloc(sizeof(tCelula));
 
     // nao tem nenhum node
-    if (!lista->ultimoNode)
+    if (!lista->ultimaCelula)
     {
-        lista->primeiroNode = lista->ultimoNode = novoNode;
-    }
-    
+        lista->primeiraCelula = lista->ultimaCelula = novoNode;
+        novoNode->anteriorCelula = NULL;
+    }    
     else
     {
-        lista->ultimoNode->proximoNode = novoNode;
-        lista->ultimoNode = lista->ultimoNode->proximoNode;
+        novoNode->anteriorCelula = lista->ultimaCelula;
+        lista->ultimaCelula->proximaCelula = novoNode;
+        lista->ultimaCelula = novoNode;
     }
 
-    lista->ultimoNode->produto = animal;
-    lista->ultimoNode->proximoNode = NULL; 
+    novoNode->tAnimal = animal;
+    novoNode->proximaCelula = NULL; 
 }
 
 void RetiraLista(tLista *lista, void* animal);
 
 void DesalocaLista(tLista *lista);
 
-void ImprimeLista(tLista *lista);
+void ImprimeLista(tLista *lista)
+{
+
+}
