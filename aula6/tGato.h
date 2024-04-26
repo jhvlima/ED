@@ -13,4 +13,6 @@ void imprimeGato(tGato *g);
 
 void liberaGato(tGato *g);
 
+int verificaTemperamentoGato(tGato* c);
+
 #endif

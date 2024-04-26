@@ -1,6 +1,8 @@
 NOME = JoaoHenrique
 OBJETOS = tBannhoTosa.o tGato.o tLista.o tCachorro.o
 
+all: testa
+
 compila: clean
 # compila *.c para *.o
 	gcc -c *.c

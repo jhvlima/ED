@@ -9,17 +9,18 @@
 
 #include <stdio.h>
 #include "tBanhoTosa.h"
-
+#define MANSO 1
+#define AGRESSIVO 2
 int main(int argc, const char * argv[]) {
 
     //cadastra uns cachorrinhos e gatinhos
     //nome e nível de agressividade
     
-    tCachorro* iris = inicCachorro("Iris", BRAVO);
+    tCachorro* iris = inicCachorro("Iris", AGRESSIVO);
     tCachorro* bob = inicCachorro("Bob", MANSO);
     tCachorro* baby = inicCachorro("Baby", MANSO);
 
-    tGato* branca = inicGato("Branca", BRAVO);
+    tGato* branca = inicGato("Branca", AGRESSIVO);
     tGato* ronaldo = inicGato("RonaldoCesar", MANSO);
     
 
@@ -38,7 +39,7 @@ int main(int argc, const char * argv[]) {
     imprimeBanhoTosa(loja);
     
     //muda nível de agressividade (por exemplo, bob ficou agressivo)
-    atribuiNivelAgressividadeCachorro(bob, BRAVO);
+    atribuiNivelAgressividadeCachorro(bob, AGRESSIVO);
     
     //precisa atualizar a situação do Bob na loja
     atualizaSituacaoCachorro(loja, bob);

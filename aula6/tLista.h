@@ -5,19 +5,25 @@
 #include <string.h>
 #include <stdlib.h>
 
+typedef struct _tCelula tCelula;
+
 typedef struct _tLista tLista;
 
 // cria lista vazia
-tLista *CriaLista();
+tLista *criaLista();
 
 // insere na ultima posicao da lista
-void InsereLista(tLista *lista, void *animal);
+void insereLista(tLista *lista, void *animal);
 
-void RetiraLista(tLista *lista, void* animal);
+void retiraLista(tLista *lista, void* animal);
 
-void DesalocaLista(tLista *lista);
+void desalocaLista(tLista *lista);
 
-void ImprimeLista(tLista *lista);
+void imprimeLista(tLista *lista);
+
+float calculaReceitaLista(tLista *l);
+
+float calculaReceitaListaAgressivo(tLista *l);
 
 
 #endif

@@ -1,6 +1,10 @@
 #include "tGato.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MANSO 1
+#define AGRESSIVO 2
 
 typedef struct _tGato
 {
@@ -22,14 +26,14 @@ void atribuiNivelAgressividadeGato(tGato *g, int vibeNova)
 
 void imprimeGato(tGato *g)
 {
-    printf("%s", g->nome);
+    printf("%s\t", g->nome);
     if(g->vibe == MANSO)
     {
-        printf("manso");
+        printf("VIBE: manso\n");
     }
     else
     {
-        printf("agressivo");
+        printf("VIBE: agressivo\n");
     }
 }
 
@@ -40,4 +44,9 @@ void liberaGato(tGato *g)
         free(g->nome);
         free(g);
     }
+}
+
+int verificaTemperamentoGato(tGato* c)
+{
+    return c->vibe;
 }

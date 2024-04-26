@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tBanhoTosa.h"
 #include "tLista.h"
 #include "tGato.h"
 #include "tCachorro.h"
+
+#define MANSO 1
+#define AGRESSIVO 2
 
 typedef struct tBanhoTosa
 {
@@ -12,7 +16,7 @@ typedef struct tBanhoTosa
     tLista *mansos;
 } tBanhoTosa;
 
-tBanhoTosa* inicaBanhoTosa(char* nome)
+tBanhoTosa* inicBanhoTosa(char* nome)
 {
     tBanhoTosa *loja = malloc(sizeof(tBanhoTosa));
     loja->nome = strdup(nome);
@@ -36,11 +40,11 @@ void cadastraCachorro(tBanhoTosa* loja, tCachorro* dog)
     
     if (verificaTemperamentoCachorro(dog) == MANSO)
     {
-        InsereLista(loja->mansos, dog);
+        insereLista(loja->mansos, dog);
     }
     else
     {
-        InsereLista(loja->agressivos, dog);
+        insereLista(loja->agressivos, dog);
     }
 }
 
@@ -59,11 +63,11 @@ void cadastraGato(tBanhoTosa* loja, tGato* cat)
     
     if (verificaTemperamentoGato(cat) == MANSO)
     {
-        InsereLista(loja->mansos, cat);
+        insereLista(loja->mansos, cat);
     }
     else
     {
-        InsereLista(loja->agressivos, cat);
+        insereLista(loja->agressivos, cat);
     }
 }
 
@@ -82,13 +86,13 @@ void atualizaSituacaoGato(tBanhoTosa* loja, tGato* cat)
 
     if (verificaTemperamentoGato(cat) == AGRESSIVO)
     {
-        InsereLista(loja->agressivos, cat);
-        RetiraLista(cat, loja->mansos);
+        insereLista(loja->agressivos, cat);
+        retiraLista(loja->mansos, cat);
     }
     else
     {
-        InsereLista(loja->mansos, cat);
-        RetiraLista(cat, loja->agressivos);
+        insereLista(loja->mansos, cat);
+        retiraLista(loja->agressivos, cat);
     }
 }
 
@@ -107,13 +111,13 @@ void atualizaSituacaoCachorro(tBanhoTosa* loja, tCachorro* dog)
 
     if (verificaTemperamentoCachorro(dog) == AGRESSIVO)
     {
-        InsereLista(loja->agressivos, dog);
-        RetiraLista(dog, loja->mansos);
+        insereLista(loja->agressivos, dog);
+        retiraLista(loja->mansos, dog);
     }
     else
     {
-        InsereLista(loja->mansos, dog);
-        RetiraLista(dog, loja->agressivos);
+        insereLista(loja->mansos, dog);
+        retiraLista(loja->agressivos, dog);
     }
 }
 
@@ -125,25 +129,18 @@ void imprimeBanhoTosa(tBanhoTosa* loja)
         return;
     }
     printf("%s\n", loja->nome);
-    ImprimeLista(loja->agressivos);
-    ImprimeLista(loja->mansos);
+    imprimeLista(loja->agressivos);
+    imprimeLista(loja->mansos);
 }
 
-/* Calcula o valor que a loja vai receber caso todos os animais tomem banho.
- Valor tGato: 30 reais, Valor tCachorro: 40 reais. Caso o animal seja agressivo, é cobrado uma taxa extra de 5 reais.
-* inputs: referencia para a loja
-* output: valor da receita
-* pre-condicao: loja alocada
-* pos-condicao: nenhuma alteração feita nos conteúdos das estruturas de dados */
 float calculaReceita(tBanhoTosa* loja)
 {
     if (!loja)
     {
         printf("LOJA NAO EXISTENTE\n");
-        return;
+        return 0;
     }
-     
-    percorreLista(loja->agressivos) obtemTipoAnimal()
+    return calculaReceitaListaAgressivo(loja->agressivos) + calculaReceitaLista(loja->mansos);
 }
 
 void liberaBanhoTosa(tBanhoTosa* loja)
@@ -153,11 +150,11 @@ void liberaBanhoTosa(tBanhoTosa* loja)
         free(loja->nome);
         if (loja->agressivos)
         {
-            DesalocaLista(loja->agressivos);
+            desalocaLista(loja->agressivos);
         }
         if (loja->mansos)
         {
-            DesalocaLista(loja->mansos);
+            desalocaLista(loja->mansos);
         }
         free(loja);
     }

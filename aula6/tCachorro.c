@@ -1,10 +1,13 @@
 #include "tCachorro.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MANSO 1
+#define AGRESSIVO 2
 
 typedef struct _tCachorro
 {
-    func *imprimeCachorro;
     char *nome;
     int vibe;
 }tCachorro;
@@ -41,4 +44,9 @@ void liberaCachorro(tCachorro *g)
         free(g->nome);
         free(g);
     }
+}
+
+int verificaTemperamentoCachorro(tCachorro* c)
+{
+    return c->vibe;
 }
