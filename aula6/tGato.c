@@ -14,7 +14,7 @@ typedef struct _tGato
 
 tGato *inicGato(char *nome, int vibe)
 {
-    tGato *g = malloc(sizeof(tGato*));
+    tGato *g = malloc(sizeof(tGato));
     g->nome = strdup(nome);
     g->vibe = vibe;
 }

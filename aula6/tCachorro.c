@@ -14,7 +14,7 @@ typedef struct _tCachorro
 
 tCachorro *inicCachorro(char *nome, int vibe)
 {
-    tCachorro *g = malloc(sizeof(tCachorro*));
+    tCachorro *g = malloc(sizeof(tCachorro));
     g->nome = strdup(nome);
     g->vibe = vibe;
 }

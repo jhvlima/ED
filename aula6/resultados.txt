@@ -1,0 +1,100 @@
+==2785== Memcheck, a memory error detector
+==2785== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2785== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2785== Command: ./JoaoHenrique
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096D1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1092D1: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096E1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1092D1: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096D1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109325: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096E1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109325: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109D23: calculaReceitaListaAgressivo (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x10971F: calculaReceita (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109331: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109CAE: calculaReceitaLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109734: calculaReceita (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109331: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+PetShow
+Branca	VIBE: agressivo
+Iris	VIBE: agressivo
+RonaldoCesar	VIBE: manso
+Bob	VIBE: manso
+Baby	VIBE: manso
+PetShow
+Iris	VIBE: agressivo
+Bob	VIBE: agressivo
+RonaldoCesar	VIBE: manso
+Baby	VIBE: manso
+Branca	VIBE: manso
+
+Valor a Receber 160.00==2785== 
+==2785== HEAP SUMMARY:
+==2785==     in use at exit: 0 bytes in 0 blocks
+==2785==   total heap usage: 22 allocs, 22 frees, 4,498 bytes allocated
+==2785== 
+==2785== All heap blocks were freed -- no leaks are possible
+==2785== 
+==2785== Use --track-origins=yes to see where uninitialised values come from
+==2785== ERROR SUMMARY: 15 errors from 6 contexts (suppressed: 0 from 0)
+==2785== 
+==2785== 2 errors in context 1 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109D23: calculaReceitaListaAgressivo (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x10971F: calculaReceita (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109331: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== 
+==2785== 2 errors in context 2 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096D1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109325: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== 
+==2785== 2 errors in context 3 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096D1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1092D1: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== 
+==2785== 3 errors in context 4 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109CAE: calculaReceitaLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109734: calculaReceita (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109331: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== 
+==2785== 3 errors in context 5 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096E1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x109325: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== 
+==2785== 3 errors in context 6 of 6:
+==2785== Conditional jump or move depends on uninitialised value(s)
+==2785==    at 0x109C48: imprimeLista (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1096E1: imprimeBanhoTosa (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785==    by 0x1092D1: main (in /home/chefe/ufes/ED/aula6/JoaoHenrique)
+==2785== 
+==2785== ERROR SUMMARY: 15 errors from 6 contexts (suppressed: 0 from 0)

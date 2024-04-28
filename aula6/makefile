@@ -10,7 +10,7 @@ compila: clean
 	gcc -o $(NOME) *.o
 
 testa: compila
-	valgrind ./$(NOME)
+	nohup valgrind -s ./$(NOME) > resultados.txt
 
 clean:
 	rm -f *.o $(NOME)
