@@ -1,0 +1,86 @@
+==13818== Memcheck, a memory error detector
+==13818== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==13818== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==13818== Command: ./prog --leak-check=full -s
+==13818== 
+==============================DONO DO PEDIDO: Patricia
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: McFlurry 
+Ingredientes: chocolate,coco,sorvete baunilha
+
+
+Produto: GigaTasty 
+Ingredientes: hamburguer,pao,quejo,alface,molho tasty,cebola crispy
+
+==============================DONO DO PEDIDO: John
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: McFlurry 
+Ingredientes: chocolate,coco,sorvete baunilha
+
+Pedido não Enviado! Pedido tem mais calorias do que a restricao, tente retirar algum produto!
+==============================DONO DO PEDIDO: Patricia
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: McFlurry 
+Ingredientes: chocolate,coco,sorvete baunilha
+
+
+Produto: GigaTasty 
+Ingredientes: hamburguer,pao,quejo,alface,molho tasty,cebola crispy
+
+==============================DONO DO PEDIDO: Patricia
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: GigaTasty 
+Ingredientes: hamburguer,pao,quejo,alface,molho tasty,cebola crispy
+
+Pedido não Enviado! Pedido tem mais calorias do que a restricao, tente retirar algum produto!
+==============================DONO DO PEDIDO: Patricia
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: GigaTasty 
+Ingredientes: hamburguer,pao,quejo,alface,molho tasty,cebola crispy
+
+==============================DONO DO PEDIDO: Patricia
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+Pedido de patricia enviado!
+Pedido não Enviado! Restricao alimentar no produto: BigMac
+==============================DONO DO PEDIDO: John
+
+Produto: BigMac 
+Ingredientes: hamburguer,pao,alface,molho especial,picles,cebola
+
+
+Produto: McFlurry 
+Ingredientes: chocolate,coco,sorvete baunilha
+
+Pedido de John enviado!
+==13818== 
+==13818== HEAP SUMMARY:
+==13818==     in use at exit: 0 bytes in 0 blocks
+==13818==   total heap usage: 33 allocs, 33 frees, 4,945 bytes allocated
+==13818== 
+==13818== All heap blocks were freed -- no leaks are possible
+==13818== 
+==13818== For lists of detected and suppressed errors, rerun with: -s
+==13818== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

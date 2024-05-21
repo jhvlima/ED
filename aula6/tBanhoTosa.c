@@ -8,6 +8,8 @@
 
 #define MANSO 1
 #define AGRESSIVO 2
+#define CACHORRO 3
+#define GATO 4
 
 typedef struct tBanhoTosa
 {
@@ -40,11 +42,11 @@ void cadastraCachorro(tBanhoTosa* loja, tCachorro* dog)
     
     if (verificaTemperamentoCachorro(dog) == MANSO)
     {
-        insereLista(loja->mansos, dog);
+        insereLista(loja->mansos, dog, CACHORRO);
     }
     else
     {
-        insereLista(loja->agressivos, dog);
+        insereLista(loja->agressivos, dog, CACHORRO);
     }
 }
 
@@ -63,11 +65,11 @@ void cadastraGato(tBanhoTosa* loja, tGato* cat)
     
     if (verificaTemperamentoGato(cat) == MANSO)
     {
-        insereLista(loja->mansos, cat);
+        insereLista(loja->mansos, cat, GATO);
     }
     else
     {
-        insereLista(loja->agressivos, cat);
+        insereLista(loja->agressivos, cat, GATO);
     }
 }
 
@@ -86,12 +88,12 @@ void atualizaSituacaoGato(tBanhoTosa* loja, tGato* cat)
 
     if (verificaTemperamentoGato(cat) == AGRESSIVO)
     {
-        insereLista(loja->agressivos, cat);
+        insereLista(loja->agressivos, cat, GATO);
         retiraLista(loja->mansos, cat);
     }
     else
     {
-        insereLista(loja->mansos, cat);
+        insereLista(loja->mansos, cat, GATO);
         retiraLista(loja->agressivos, cat);
     }
 }
@@ -111,12 +113,12 @@ void atualizaSituacaoCachorro(tBanhoTosa* loja, tCachorro* dog)
 
     if (verificaTemperamentoCachorro(dog) == AGRESSIVO)
     {
-        insereLista(loja->agressivos, dog);
+        insereLista(loja->agressivos, dog, CACHORRO);
         retiraLista(loja->mansos, dog);
     }
     else
     {
-        insereLista(loja->mansos, dog);
+        insereLista(loja->mansos, dog, CACHORRO);
         retiraLista(loja->agressivos, dog);
     }
 }

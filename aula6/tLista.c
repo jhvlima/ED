@@ -12,22 +12,22 @@ typedef union tAnimal
 {
     tCachorro *cachorro;
     tGato *gato;
-}tAnimal;
+} tAnimal;
 
-typedef struct _tCelula 
+typedef struct _tCelula
 {
     int tipoAnimal;
     tAnimal *animal;
     tCelula *proximaCelula;
     tCelula *anteriorCelula;
-}tCelula;
+} tCelula;
 
 // sentinela
-typedef struct _tLista 
+typedef struct _tLista
 {
-    tCelula* primeiraCelula;
-    tCelula* ultimaCelula;
-}tLista;
+    tCelula *primeiraCelula;
+    tCelula *ultimaCelula;
+} tLista;
 
 tLista *criaLista()
 {
@@ -37,7 +37,7 @@ tLista *criaLista()
 }
 
 // insere na ultima posicao da lista
-void insereLista(tLista *lista, void *animal)
+void insereLista(tLista *lista, void *animal, int tipo)
 {
     if (animal == NULL)
     {
@@ -51,7 +51,7 @@ void insereLista(tLista *lista, void *animal)
     {
         lista->primeiraCelula = lista->ultimaCelula = novoNode;
         novoNode->anteriorCelula = NULL;
-    }    
+    }
     else
     {
         novoNode->anteriorCelula = lista->ultimaCelula;
@@ -60,10 +60,11 @@ void insereLista(tLista *lista, void *animal)
     }
 
     novoNode->animal = animal;
-    novoNode->proximaCelula = NULL; 
+    novoNode->proximaCelula = NULL;
+    novoNode->tipoAnimal = tipo;
 }
 
-void retiraLista(tLista *lista, void* animal)
+void retiraLista(tLista *lista, void *animal)
 {
     tCelula *auxiliar = lista->primeiraCelula;
     while (auxiliar)
@@ -83,7 +84,7 @@ void retiraLista(tLista *lista, void* animal)
                 lista->primeiraCelula = auxiliar->proximaCelula;
                 break;
             }
-            
+
             // ultimo node
             if (auxiliar == lista->ultimaCelula)
             {
@@ -124,11 +125,11 @@ void imprimeLista(tLista *lista)
     {
         if (auxiliar->tipoAnimal == CACHORRO)
         {
-            imprimeCachorro(auxiliar->animal);
+            imprimeCachorro((tCachorro*)auxiliar->animal);
         }
         else
         {
-            imprimeGato(auxiliar->animal);
+            imprimeGato((tGato*)auxiliar->animal);
         }
         auxiliar = auxiliar->proximaCelula;
     }

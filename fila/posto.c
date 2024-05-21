@@ -2,6 +2,7 @@
 #include "tFila.h"
 #include "amostra.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -16,7 +17,7 @@ struct posto
 
 Posto* inicPosto(char* nome)
 {
-    Posto *posto = calloc();
+    Posto *posto = calloc(1, sizeof(Posto));
     posto->naoProcessado = criaFila();
     posto->processadoNegativo = criaFila();
     posto->processadoPositivo = criaFila();
@@ -49,7 +50,7 @@ void imprimePosto(Posto* posto)
 void realizaColeta(Posto* posto, char* pessoa, int idade)
 {
     Amostra *amostra = inicAmostra(pessoa, idade);
-    insereFila(posto->naoProcessado, )
+    insereFila(posto->naoProcessado, amostra);
 }
 
 
@@ -61,7 +62,20 @@ void realizaColeta(Posto* posto, char* pessoa, int idade)
  */
 void processaLoteAmostras(Posto* posto)
 {
-
+    Amostra *amostra = retornaPrimeiraAmostra(posto->naoProcessado);
+    while (amostra)
+    {
+        if (LIMITE_CARGA_VIRAL < retornaCargaViral(amostra))
+        {
+            insereFila(posto->processadoPositivo, amostra);
+        }
+        else
+        {
+            insereFila(posto->processadoNegativo, amostra);
+        }
+        retiraFila(posto->naoProcessado);
+        amostra = retornaProximaAmostra(posto->naoProcessado, amostra);
+    }
 }
 
 void liberaPosto(Posto* posto)

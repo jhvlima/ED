@@ -13,7 +13,7 @@ typedef struct _tLista tLista;
 tLista *criaLista();
 
 // insere na ultima posicao da lista
-void insereLista(tLista *lista, void *animal);
+void insereLista(tLista *lista, void *animal, int tipo);
 
 void retiraLista(tLista *lista, void* animal);
 

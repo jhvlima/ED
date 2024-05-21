@@ -31,6 +31,6 @@ int main(int argc, const char * argv[]) {
      Amostra com resultados negativos
      */
     imprimePosto(jcamburi);
-
+    liberaPosto(jcamburi);
     return 0;
 }

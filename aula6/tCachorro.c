@@ -26,14 +26,14 @@ void atribuiNivelAgressividadeCachorro(tCachorro *g, int vibeNova)
 
 void imprimeCachorro(tCachorro *g)
 {
-    printf("%s", g->nome);
+    printf("%s\t", g->nome);
     if(g->vibe == MANSO)
     {
-        printf("manso");
+        printf("VIBE: manso\n");
     }
     else
     {
-        printf("agressivo");
+        printf("VIBE: agressivo\n");
     }
 }
 
