@@ -1,0 +1,96 @@
+==9087== Memcheck, a memory error detector
+==9087== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9087== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9087== Command: ./prog1
+==9087== 
+Dados do Posto: Posto de Jardim Camburi
+Amostras não processadas
+Nome do dono da amostra: Joao, carga viral: 886, idade: 64, resultado: POSITIVO
+Nome do dono da amostra: Patricia, carga viral: 383, idade: 44, resultado: POSITIVO
+Nome do dono da amostra: Maria, carga viral: 777, idade: 20, resultado: POSITIVO
+
+Amostras com resultados positivos
+
+Amostra com resultados negativos
+==9087== 
+==9087== HEAP SUMMARY:
+==9087==     in use at exit: 0 bytes in 0 blocks
+==9087==   total heap usage: 15 allocs, 15 frees, 4,340 bytes allocated
+==9087== 
+==9087== All heap blocks were freed -- no leaks are possible
+==9087== 
+==9087== For lists of detected and suppressed errors, rerun with: -s
+==9087== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==9110== Memcheck, a memory error detector
+==9110== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9110== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9110== Command: ./prog2
+==9110== 
+Dados do Posto: Posto de Jardim Camburi
+Amostras não processadas
+Nome do dono da amostra: Joao, carga viral: 886, idade: 64, resultado: POSITIVO
+Nome do dono da amostra: Patricia, carga viral: 383, idade: 44, resultado: POSITIVO
+Nome do dono da amostra: Maria, carga viral: 777, idade: 20, resultado: POSITIVO
+
+Amostras com resultados positivos
+
+Amostra com resultados negativos
+==9110== 
+==9110== HEAP SUMMARY:
+==9110==     in use at exit: 0 bytes in 0 blocks
+==9110==   total heap usage: 15 allocs, 15 frees, 4,340 bytes allocated
+==9110== 
+==9110== All heap blocks were freed -- no leaks are possible
+==9110== 
+==9110== For lists of detected and suppressed errors, rerun with: -s
+==9110== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==9114== Memcheck, a memory error detector
+==9114== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9114== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9114== Command: ./prog3
+==9114== 
+Dados do Posto: Posto de Jardim Camburi
+Amostras não processadas
+Nome do dono da amostra: Joao, carga viral: 886, idade: 64, resultado: POSITIVO
+Nome do dono da amostra: Patricia, carga viral: 383, idade: 44, resultado: POSITIVO
+Nome do dono da amostra: Maria, carga viral: 777, idade: 20, resultado: POSITIVO
+
+Amostras com resultados positivos
+
+Amostra com resultados negativos
+Dados do Posto: Posto de Jardim Camburi
+Amostras não processadas
+Nome do dono da amostra: Patricia, carga viral: 383, idade: 44, resultado: POSITIVO
+Nome do dono da amostra: Maria, carga viral: 777, idade: 20, resultado: POSITIVO
+
+Amostras com resultados positivos
+Nome do dono da amostra: Joao, carga viral: 886, idade: 64, resultado: POSITIVO
+
+Amostra com resultados negativos
+Dados do Posto: Posto de Jardim da Penha
+Amostras não processadas
+Nome do dono da amostra: C, carga viral: 335, idade: 65, resultado: POSITIVO
+Nome do dono da amostra: B, carga viral: 793, idade: 61, resultado: POSITIVO
+Nome do dono da amostra: A, carga viral: 915, idade: 23, resultado: POSITIVO
+
+Amostras com resultados positivos
+
+Amostra com resultados negativos
+Dados do Posto: Posto de Jardim da Penha
+Amostras não processadas
+Nome do dono da amostra: B, carga viral: 793, idade: 61, resultado: POSITIVO
+Nome do dono da amostra: A, carga viral: 915, idade: 23, resultado: POSITIVO
+
+Amostras com resultados positivos
+
+Amostra com resultados negativos
+Nome do dono da amostra: C, carga viral: 335, idade: 65, resultado: POSITIVO
+==9114== 
+==9114== HEAP SUMMARY:
+==9114==     in use at exit: 0 bytes in 0 blocks
+==9114==   total heap usage: 31 allocs, 31 frees, 4,603 bytes allocated
+==9114== 
+==9114== All heap blocks were freed -- no leaks are possible
+==9114== 
+==9114== For lists of detected and suppressed errors, rerun with: -s
+==9114== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
