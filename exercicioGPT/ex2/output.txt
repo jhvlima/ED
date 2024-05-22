@@ -1,0 +1,6 @@
+Current Page: home.html
+Current Page: page1.html
+Current Page: page2.html
+Current Page: page1.html
+Current Page: home.html
+Current Page: page2.html
