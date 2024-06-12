@@ -1,0 +1,60 @@
+==54997== Memcheck, a memory error detector
+==54997== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==54997== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==54997== Command: ./main --leak-check=ful
+==54997== 
+|nome5| <|nome3| <|nome1| <>>|nome2| <>>|nome4| <>==54997== 
+==54997== HEAP SUMMARY:
+==54997==     in use at exit: 190 bytes in 15 blocks
+==54997==   total heap usage: 16 allocs, 1 frees, 4,286 bytes allocated
+==54997== 
+==54997== LEAK SUMMARY:
+==54997==    definitely lost: 24 bytes in 1 blocks
+==54997==    indirectly lost: 166 bytes in 14 blocks
+==54997==      possibly lost: 0 bytes in 0 blocks
+==54997==    still reachable: 0 bytes in 0 blocks
+==54997==         suppressed: 0 bytes in 0 blocks
+==54997== Rerun with --leak-check=full to see details of leaked memory
+==54997== 
+==54997== For lists of detected and suppressed errors, rerun with: -s
+==54997== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==55104== Memcheck, a memory error detector
+==55104== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==55104== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==55104== Command: ./main --leak-check=ful
+==55104== 
+|nome5| < |nome3| < |nome1| < >>|nome2| < >>|nome4| < >==55104== 
+==55104== HEAP SUMMARY:
+==55104==     in use at exit: 190 bytes in 15 blocks
+==55104==   total heap usage: 16 allocs, 1 frees, 4,286 bytes allocated
+==55104== 
+==55104== LEAK SUMMARY:
+==55104==    definitely lost: 24 bytes in 1 blocks
+==55104==    indirectly lost: 166 bytes in 14 blocks
+==55104==      possibly lost: 0 bytes in 0 blocks
+==55104==    still reachable: 0 bytes in 0 blocks
+==55104==         suppressed: 0 bytes in 0 blocks
+==55104== Rerun with --leak-check=full to see details of leaked memory
+==55104== 
+==55104== For lists of detected and suppressed errors, rerun with: -s
+==55104== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==55164== Memcheck, a memory error detector
+==55164== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==55164== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==55164== Command: ./main --leak-check=ful
+==55164== 
+|nome5| < |nome3| < |nome1| <  > >|nome2| <  > >|nome4| <  >==55164== 
+==55164== HEAP SUMMARY:
+==55164==     in use at exit: 190 bytes in 15 blocks
+==55164==   total heap usage: 16 allocs, 1 frees, 4,286 bytes allocated
+==55164== 
+==55164== LEAK SUMMARY:
+==55164==    definitely lost: 24 bytes in 1 blocks
+==55164==    indirectly lost: 166 bytes in 14 blocks
+==55164==      possibly lost: 0 bytes in 0 blocks
+==55164==    still reachable: 0 bytes in 0 blocks
+==55164==         suppressed: 0 bytes in 0 blocks
+==55164== Rerun with --leak-check=full to see details of leaked memory
+==55164== 
+==55164== For lists of detected and suppressed errors, rerun with: -s
+==55164== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
