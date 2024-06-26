@@ -13,10 +13,10 @@
 #include <string.h>
 #include "arvore.h"
 
-typedef struct tAluno
+struct _tAluno
 {
     char *nome;
-}tAluno;
+};
 
 void liberaAluno(tAluno *aluno)
 {
@@ -35,9 +35,9 @@ void imprimeAluno(tAluno *aluno)
     }
 }
 
-int ehIgual(tAluno *a1, tAluno *a2)
+int ehIgual(tAluno *a1, char *a2)
 {
-    return 0;
+    return !strcmp(a1->nome, a2);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ int tarv_pertence (tArv* a, tAluno *chave)
     }
     else
     {
-        return ehIgual(a->dado, chave) || tarv_pertence(a->esq, chave) || tarv_pertence(a->dir, chave); 
+        return ehIgual(a->dado, chave->nome) || tarv_pertence(a->esq, chave) || tarv_pertence(a->dir, chave); 
     }
 }
 
@@ -123,7 +123,7 @@ int folhas (tArv* a) //retorna o número de folhas da árvore
 
 
 
-int ocorrencias (tArv* a , char* nome) //retorna o número de vezes que o aluno aparece na árvore
+int ocorrencias (tArv* a , char* nome) // retorna o número de vezes que o aluno aparece na árvore
 {
     int soma = 0;
     if (!tarv_vazia(a))

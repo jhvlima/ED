@@ -1,12 +1,11 @@
 #include <stdio.h>
-//#include "aluno.h"
 
 #ifndef tarvore
 #define tarvore
 
 typedef struct _tArv tArv;
 
-typedef struct tAluno tAluno;
+typedef struct _tAluno tAluno;
 
 //Cria uma árvore vazia
 tArv* tarv_criavazia (void);
