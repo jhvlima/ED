@@ -1,5 +1,5 @@
 /*
-    Implemente o TAD árvore da aula passada com a seguinte modificação: 
+    Implemente o TAD árvore da aula passada com a seguinte modificação:
         faça um TAD árvore de alunos (e não de char, como na aula). Use o nome do aluno como chave de busca na função pertence. Além disto, faça as funções:
             - int folhas (tArv* a); //retorna o número de folhas da árvore
             - int ocorrencias (tArv* a , char* nome); //retorna o número de vezes que o aluno aparece na árvore
@@ -69,11 +69,12 @@ tArv* tarv_cria (tAluno *aluno, tArv* e, tArv* d)
 //libera o espaço de memória ocupado pela árvore a
 tArv* tarv_libera (tArv* a)
 {
-    if (a)
+    if (!tarv_vazia(a))
     {
         tarv_libera(a->esq);
         tarv_libera(a->dir);
         liberaAluno(a->dado);
+        free(a);
     }
     return NULL;
 }
@@ -94,7 +95,7 @@ int tarv_pertence (tArv* a, tAluno *chave)
     }
     else
     {
-        return ehIgual(a->dado, chave->nome) || tarv_pertence(a->esq, chave) || tarv_pertence(a->dir, chave); 
+        return ehIgual(a->dado, chave->nome) || tarv_pertence(a->esq, chave) || tarv_pertence(a->dir, chave);
     }
 }
 
@@ -114,14 +115,20 @@ void tarv_imprime (tArv* a)
 
 int folhas (tArv* a) //retorna o número de folhas da árvore
 {
-    tArv *auxiliar = a; 
-    while (auxiliar)
+    int soma = 0;
+  
+    if (!tarv_vazia(a->dir))
     {
-        
+        soma =+ folhas(a->dir);
     }
+
+    if (!tarv_vazia(a->esq))
+    {
+        soma =+ folhas(a->esq);
+    }
+
+    return soma + 1;
 }
-
-
 
 int ocorrencias (tArv* a , char* nome) // retorna o número de vezes que o aluno aparece na árvore
 {
@@ -131,23 +138,45 @@ int ocorrencias (tArv* a , char* nome) // retorna o número de vezes que o aluno
         // rever essa impresao com <>
         if (ehIgual(a->dado, nome))
         {
-            soma ++;
+            return soma +1;
         }
-        
-        ocorrencias(a->esq, nome);
-        ocorrencias(a->dir, nome); 
+
+        soma = ocorrencias(a->esq, nome) + ocorrencias(a->dir, nome);
     }
     return soma;
 }
 
-int altura (tArv* a); //retorna a altura da árvore
+int altura (tArv* a) //retorna a altura da árvore
+{
+    if (tarv_vazia(a))
+    {
+        return -1;
+    }
 
+    int  maximoDir = 0, maximoEsq = 0;
+
+    if (!tarv_vazia(a->dir))
+    {
+        maximoDir =+ 1 +altura(a->dir);
+    }
+
+    if (!tarv_vazia(a->esq))
+    {
+        maximoEsq =+ 1 + altura(a->esq);
+    }
+
+    if (maximoDir > maximoEsq)
+    {
+        return maximoDir;
+    }
+    return maximoEsq;
+}
 
 int main ()
 {
     // cria alunos
     tAluno *a1 = calloc(1, sizeof(tAluno));
-    a1->nome = strdup("nome1"); 
+    a1->nome = strdup("nome1");
 
     tAluno *a2 = calloc(1, sizeof(tAluno));
     a2->nome = strdup("nome2");
@@ -170,7 +199,14 @@ int main ()
 
     tArv *root = tarv_cria(a5, galho3, galho4);
 
+    // testa funcionalidades
     tarv_imprime(root);
+    printf("\nQnt de folhas: %d\n", folhas(root));
+    printf("Altura: %d\n", altura(root));
+    printf("Ocorrencias: %d\n", ocorrencias(root, "nome1"));
+
+    // libera estruturas e dados
+    tarv_libera(root);
 
     return 0;
 }
