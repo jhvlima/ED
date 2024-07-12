@@ -1,5 +1,5 @@
 /* Implementar uma árvore com número variável de filhos, como nos slides.
-Além das funcionalidades básicas (criação, impressão, busca, liberação), implementar as seguintes funcionalidades: 
+Além das funcionalidades básicas (criação, impressão, busca, liberação), implementar as seguintes funcionalidades:
 calcular a altura da árvore; calcular o número de nós folha de uma árvore; e calcular o número de nós com apenas um filho. */
 
 #include <stdio.h>
@@ -12,8 +12,9 @@ struct _tAluno
     char *nome;
 };
 
-void liberaAluno(tAluno *aluno)
+void liberaAluno(void *a)
 {
+    tAluno *aluno = (tAluno*)a;
     if (aluno)
     {
         free(aluno->nome);
@@ -25,7 +26,7 @@ void imprimeAluno(tAluno *aluno)
 {
     if (aluno)
     {
-        printf("|%s| ", aluno->nome);
+        printf(" |%s| ", aluno->nome);
     }
 }
 
@@ -34,14 +35,13 @@ int ehIgual(tAluno *a1, char *a2)
     return !strcmp(a1->nome, a2);
 }
 
-////////////////////////////////////////////////////////////////////////
+/*--------------------------------------------| Estrutura de Arvore Variada |---------------------------------------------------*/
 
 struct _tArv
 {
     tAluno *dado;
-    tArv *esq;
-    tArv *dir;
-    tArv **listaFilhos;
+    tArv *listaFilhos; // na verdade é o primeiro filho
+    tArv *listaIrmaos; // na verdade é o primeiro irmao
 };
 
 //Cria uma árvore vazia
@@ -52,25 +52,35 @@ tArv* tarv_criavazia (void)
 
 //cria uma árvore com a informação do nó raiz c, e
 //com subárvore esquerda e e subárvore direita d
-tArv* tarv_cria (tAluno *aluno, tArv* e, tArv* d)
+tArv* tarv_cria (tAluno *aluno)
 {
     tArv *novo = calloc(1, sizeof(tArv));
     novo->dado = aluno;
-    novo->dir = d;
-    novo->esq = e;
+    novo->listaFilhos = NULL;
+    novo->listaIrmaos = NULL;
     return novo;
 }
+
+//insere uma nova sub-árvore como filha de um dado nó, sempre no início da lista, por simplicidade
+void tarv_insere (tArv* a, tArv* filho)
+{
+    filho->listaIrmaos = a->listaFilhos;
+    a->listaFilhos = filho;
+}
+
 
 //libera o espaço de memória ocupado pela árvore a
 tArv* tarv_libera (tArv* a)
 {
-    if (a)
-    {
-        tarv_libera(a->esq);
-        tarv_libera(a->dir);
-        liberaAluno(a->dado);
+    tArv *primogenito = a->listaFilhos;
+    while(primogenito != NULL)
+    {        
+        tArv *auxiliar = primogenito->listaIrmaos;
+        tarv_libera(primogenito);
+        primogenito = auxiliar;
     }
-    return NULL;
+    liberaAluno(a->dado);
+    free(a);
 }
 
 //retorna true se a árvore estiver vazia e false
@@ -83,42 +93,49 @@ int tarv_vazia (tArv* a)
 //indica a ocorrência (1) ou não (0) do caracter c
 int tarv_pertence (tArv* a, tAluno *chave)
 {
-    if (tarv_vazia(a))
+    tArv *primogenito;
+    if (ehIgual(a->dado, chave->nome))
     {
-        return 0;
+        return 1;
     }
     else
     {
-        return ehIgual(a->dado, chave->nome) || tarv_pertence(a->esq, chave) || tarv_pertence(a->dir, chave);
+        for (primogenito = a->listaFilhos; primogenito != NULL; primogenito->listaIrmaos)
+        {
+            if(tarv_pertence(primogenito, chave))
+            {
+                return 1;
+            }
+        }
     }
+    return 0;
 }
 
 //imprime as informações dos nós da árvore
 void tarv_imprime (tArv* a)
 {
+    tArv *primogenito;
     if (!tarv_vazia(a))
-    {
-        // rever essa impresao com <>
+    {        
+        printf("<");
         imprimeAluno(a->dado);
-        printf("< ");
-        tarv_imprime(a->esq);
-        printf(" >");
-        tarv_imprime(a->dir);
+
+        for (primogenito = a->listaFilhos; primogenito != NULL; primogenito = primogenito->listaIrmaos)
+        {
+            tarv_imprime(primogenito);
+        }
+
+        printf(">");
     }
 }
 
 int folhas (tArv* a) //retorna o número de folhas da árvore
 {
     int soma = 0;
-  
-    if (!tarv_vazia(a->dir))
-    {
-        soma =+ folhas(a->dir);
-    }
 
-    if (!tarv_vazia(a->esq))
+    if (!tarv_vazia(a->listaFilhos))
     {
-        soma =+ folhas(a->esq);
+        soma =+ folhas(a->listaFilhos);
     }
 
     return soma + 1;
@@ -135,7 +152,7 @@ int ocorrencias (tArv* a , char* nome) // retorna o número de vezes que o aluno
             return soma +1;
         }
 
-        soma = ocorrencias(a->esq, nome) + ocorrencias(a->dir, nome);
+        soma = ocorrencias(a->listaFilhos, nome);
     }
     return soma;
 }
@@ -149,14 +166,9 @@ int altura (tArv* a) //retorna a altura da árvore
 
     int  maximoDir = 0, maximoEsq = 0;
 
-    if (!tarv_vazia(a->dir))
+    if (!tarv_vazia(a->listaFilhos))
     {
-        maximoDir =+ 1 +altura(a->dir);
-    }
-
-    if (!tarv_vazia(a->esq))
-    {
-        maximoEsq =+ 1 + altura(a->esq);
+        maximoDir =+ 1 +altura(a->listaFilhos);
     }
 
     if (maximoDir > maximoEsq)
@@ -184,20 +196,49 @@ int main ()
     tAluno *a5 = calloc(1, sizeof(tAluno));
     a5->nome = strdup("nome5");
 
-    // cria arvores
-    tArv *folha1 = tarv_cria(a1, NULL, NULL);
-    tArv *folha2 = tarv_cria(a2, NULL, NULL);
+    printf("COMECANDO O PROGRAMA\n");
 
-    tArv *galho3 = tarv_cria(a3, folha1, folha2);
-    tArv *galho4 = tarv_cria(a4, NULL, NULL);
+/*  cria arvores binarias
+    tArv *folha1 = tarv_cria(a1);
+    tarv_insere(folha1, tarv_criavazia());
+    printf("INSERIDO 1 COM SUCESSO\n");
 
-    tArv *root = tarv_cria(a5, galho3, galho4);
+    tArv *folha2 = tarv_cria(a2);
+    tarv_insere(folha2, tarv_criavazia());
+    printf("INSERIDO 2 COM SUCESSO\n");
 
-    // testa funcionalidades
+    tArv *galho3 = tarv_cria(a3);
+
+
+    tArv *galho4 = tarv_cria(a4);
+    tarv_insere(galho4, tarv_criavazia());
+
+    tArv *root = tarv_cria(a5);
+    tarv_insere(root, galho3);
+    tarv_insere(root, galho4);
+*/
+
+    // cria arvores variadas 
+    tArv *folha1 = tarv_cria(a1);
+    tArv *folha2 = tarv_cria(a2);
+    tArv *galho3 = tarv_cria(a3);
+    tArv *folha4 = tarv_cria(a4);
+    tArv *root = tarv_cria(a5);
+
+    tarv_insere(galho3, folha1);
+    tarv_insere(galho3, folha2);
+
+    tarv_insere(root, galho3);
+    tarv_insere(root, folha4);
+
+    // testa funcionalidades (tem que consertar isso)
     tarv_imprime(root);
-    printf("\nQnt de folhas: %d\n", folhas(root));
-    printf("Altura: %d\n", altura(root));
-    printf("Ocorrencias: %d\n", ocorrencias(root, "nome1"));
+    //printf("\nQnt de folhas: %d\n", folhas(root));
+    //printf("Altura: %d\n", altura(root));
+    //printf("Ocorrencias: %d\n", ocorrencias(root, "nome1"));
+
+    // libera estruturas e dados
+    tarv_libera(root);
 
     return 0;
 }

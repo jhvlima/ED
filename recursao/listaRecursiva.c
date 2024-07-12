@@ -58,7 +58,10 @@ void destroiLista(tLista *lista)
 int main()
 {
     tLista *lista = criaLista();
-    insereLista(lista);
+    insereLista(lista, 10);
+    insereLista(lista, 101);
+    insereLista(lista, 1001);
+    imprimeLista(lista);
     destroiLista(lista);
     return 0;
 }

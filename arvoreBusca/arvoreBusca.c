@@ -13,7 +13,7 @@ struct _tArv
     int dado;
     tArv *dir;
     tArv *esq;
-} 
+};
 
 int tarv_vazia (tArv* a)
 {
@@ -23,7 +23,7 @@ int tarv_vazia (tArv* a)
 tArv* criaArvore(int dado, tArv* e, tArv* d)
 {
     tArv *novo = calloc(1, sizeof(tArv));
-    novo->dado = aluno;
+    novo->dado = dado;
     novo->dir = d;
     novo->esq = e;
     return novo;
@@ -42,20 +42,30 @@ tArv *imprimeArvore(tArv *a)
     }
 }
 
+int compara(tArv *a, int dado)
+{
+    return a->dado > dado;
+}
+
 tArv *insereArvore(tArv *a, int dado)
 {
-    if (!tarv_vazia(a))
+    if (tarv_vazia(a))
     {
-        // compaara se o dado é maior que o outro
+        criaArvore(dado, NULL, NULL);
+    }
+    else
+    {
+        // compara se o dado é maior que o outro
         if(compara(a->dir, dado))
         {
-            
+            a->dir = insereArvore(a->dir, dado);
         }
         else
         {
-
+            a->esq = insereArvore(a->esq, dado);
         }
-    }    
+    }
+    return a;
 }
 
 tArv *retiraArvore(tArv *a, int dado)

@@ -10,12 +10,12 @@ typedef struct _tArv tArv;
 
 tArv *criaArvore();
 
-tArv *imprimeArvore(tArv * a);
+tArv *imprimeArvore(tArv *a);
 
-tArv *insereArvore(tArv * a, );
+tArv *insereArvore(tArv *a, int dado);
 
-tArv *retiraArvore(tArv *a, );
+tArv *retiraArvore(tArv *a, int dado);
 
-tArv *liberaArvore(tArv *);
+tArv *liberaArvore(tArv *a);
 
 void ordena(tArv *a);

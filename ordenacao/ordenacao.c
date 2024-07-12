@@ -13,6 +13,7 @@ Referências quick-sort: Slides anexados e Seção 11.4 do livro texto (CELES, W
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 10
+#define BIG_MAX 10000
 
 int ehIgual(int valor1, int valor2)
 {
@@ -83,11 +84,9 @@ int binarySearch(int *vetor, int inicio, int fim, int alvo)
 
 int main()
 {
-    //int vet [100000] = rand(MAX);
     int vet [MAX] = {1, 2, 5, 5, 4, 6, 3, 4, 6, 9};
-
-
     // imprime como ta o vetor desordenado
+    printf("VETOR DESORDENADO\n");
     for (int i = 0; i < MAX; i++)
     {
         printf("[%d]", vet[i]);
@@ -96,7 +95,9 @@ int main()
 
     // ordena
     bubbleSort(vet, MAX);
-    
+    int numeroProcurado = binarySearch(vet, 0, MAX-1, 5);
+
+    printf("VETOR ORDENADO\n");
     // imprime como ta o vetor ordenado
     for (int i = 0; i < MAX; i++)
     {
@@ -104,4 +105,21 @@ int main()
     }
     printf("\n");
 
+/*---------------------------------| Vetor Grande |-------------------------------------*/
+    int bigVet [BIG_MAX];
+    for (long int i = 0; i < BIG_MAX; i++)
+    {
+        bigVet[i] = rand();
+        //printf("[%d]", bigVet[i]);
+    }
+    printf("\n");
+    printf("VETOR GRANDE DESORDENADO\n");
+
+    // ordena
+    bubbleSort(bigVet, BIG_MAX);
+    //qsort(bigVet,,sizeof(int),);
+    printf("VETOR GRANDE ORDENADO\n");
+    //int numeroProcurado = binarySearch(bigVet, 0, 9, 5);
+
+    return 0;
 }
