@@ -1,5 +1,5 @@
-/* 
-Implemente um TAD árvore binária de busca (ABB) de alunos, com as funcionalidades básicas de: criação, busca, impressão, inserção, retirada e liberação. 
+/*
+Implemente um TAD árvore binária de busca (ABB) de alunos, com as funcionalidades básicas de: criação, busca, impressão, inserção, retirada e liberação.
 Você escolhe o critério de ordenação para sua ABB.
 Implemente um testador para sua implementação.
 */
@@ -15,12 +15,17 @@ struct _tArv
     tArv *esq;
 };
 
-int tarv_vazia (tArv* a)
+int ehIgual(int dado1, int dado2)
 {
-   return a == NULL;
+    return dado1 == dado2;
 }
 
-tArv* criaArvore(int dado, tArv* e, tArv* d)
+int tarv_vazia(tArv *a)
+{
+    return a == NULL;
+}
+
+tArv *criaArvore(int dado, tArv *e, tArv *d)
 {
     tArv *novo = calloc(1, sizeof(tArv));
     novo->dado = dado;
@@ -30,41 +35,41 @@ tArv* criaArvore(int dado, tArv* e, tArv* d)
 }
 
 tArv *imprimeArvore(tArv *a)
-{ 
+{
     if (!tarv_vazia(a))
     {
         // rever essa impresao com <>
-        printf("|%d|", a->dado);
-        printf("< ");
+        printf(" |%d| ", a->dado);
+        printf("<");
         imprimeArvore(a->esq);
-        printf(" >");
+        printf(">");
         imprimeArvore(a->dir);
     }
 }
 
-int compara(tArv *a, int dado)
+int compara(int dado1, int dado2)
 {
-    return a->dado > dado;
+    return dado1 > dado2;
 }
 
-tArv *insereArvore(tArv *a, int dado)
+tArv *insereArvore(tArv *a, int novoDado)
 {
+    // cria a subarvore(folha) que contem o dado
     if (tarv_vazia(a))
     {
-        criaArvore(dado, NULL, NULL);
+        return criaArvore(novoDado, NULL, NULL);
+    }
+    // procura o lugar para inserir a subarvore(folha)
+    if (compara(a->dado, novoDado))
+    {
+        a->dir = insereArvore(a->dir, novoDado);
     }
     else
     {
-        // compara se o dado é maior que o outro
-        if(compara(a->dir, dado))
-        {
-            a->dir = insereArvore(a->dir, dado);
-        }
-        else
-        {
-            a->esq = insereArvore(a->esq, dado);
-        }
+        a->esq = insereArvore(a->esq, novoDado);
     }
+    
+    // retorna a arvore completa
     return a;
 }
 
@@ -72,26 +77,77 @@ tArv *retiraArvore(tArv *a, int dado)
 {
     if (!tarv_vazia(a))
     {
-        if(ehIgual(a->dado, dado))
+        if (ehIgual(a->dado, dado))
         {
             return a;
         }
+
+        // procura o lugar para inserir a subarvore(folha)
+        if (compara(a->dado, dado))
+        {
+            return retiraArvore(a->dir, dado);
+        }
+        else
+        {
+            return retiraArvore(a->esq, dado);
+        }
     }
+    return NULL;
 }
 
 tArv *liberaArvore(tArv *a)
 {
     if (!tarv_vazia(a))
     {
-        tarv_libera(a->esq);
-        tarv_libera(a->dir);
-        liberaAluno(a->dado);
+        liberaArvore(a->esq);
+        liberaArvore(a->dir);
         free(a);
     }
     return NULL;
 }
 
-void ordena(tArv *a)
+tArv *buscaBinaria(tArv *a, int chaveBusca)
 {
+    if (tarv_vazia(a) || (a->dado == chaveBusca))
+    {
+        return a;
+    }
+    if (compara(a->dado, chaveBusca))
+    {
+        return buscaBinaria(a->dir, chaveBusca);
+    }
+    return buscaBinaria(a->esq, chaveBusca);
+}
 
+int main()
+{
+    // cria arvores
+    tArv *root = criaArvore(50, NULL, NULL);
+
+    root = insereArvore(root, 10);
+    root = insereArvore(root, 20);
+    root = insereArvore(root, 30);
+    root = insereArvore(root, 40);
+    root = insereArvore(root, 25);
+
+    tArv *foundNode = buscaBinaria(root, 40);
+    if (foundNode != NULL)
+    {
+        printf("Node found with value: %d\n", foundNode->dado);
+    }
+    else
+    {
+        printf("Node not found\n");
+    }
+
+    // testa funcionalidades
+    imprimeArvore(root);
+    //printf("\nQnt de folhas: %d\n", folhas(root));
+    //printf("Altura: %d\n", altura(root));
+    //printf("Ocorrencias: %d\n", ocorrencias(root, "nome1"));
+
+    // libera estruturas e dados
+    liberaArvore(root);
+
+    return 0;
 }

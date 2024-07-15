@@ -3,5 +3,6 @@
         "string.h": "c",
         "tlista.h": "c",
         "stdlib.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
