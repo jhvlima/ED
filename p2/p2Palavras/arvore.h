@@ -11,18 +11,21 @@ tArv *criaArvoreVazia();
 
 tArv *buscaEIncrementaArvore(tArv *a, char* palavra);
 
-void insereArvore(tArv *a, tArv *sub);
+tArv *insereArvore(tArv *a, tPalavra* palavra);
 
 void imprimeArvore(tArv *a);
 
+// qnt de arvores
 int palavrasDistintas(tArv *a);
 
+// soma de todas ocorrencias
 int totalOcorrencias(tArv *a);
 
 int obtemOcorrencia(tArv *a);
 
 char *obtemPalavra(tArv *a);
 
+// 
 int maiorOcorrencia(tArv *a);
 
 void imprimeVetor(tPalavra *vetor, int tam);

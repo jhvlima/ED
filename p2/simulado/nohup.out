@@ -1,0 +1,36 @@
+==22055== Memcheck, a memory error detector
+==22055== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==22055== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==22055== Command: ./main --leak-check=ful
+==22055== 
+Destination 33 not found
+Found destination: 23
+Destination 46 not found
+Destination 50 not found
+==22055== 
+==22055== HEAP SUMMARY:
+==22055==     in use at exit: 0 bytes in 0 blocks
+==22055==   total heap usage: 6 allocs, 6 frees, 4,312 bytes allocated
+==22055== 
+==22055== All heap blocks were freed -- no leaks are possible
+==22055== 
+==22055== For lists of detected and suppressed errors, rerun with: -s
+==22055== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==22284== Memcheck, a memory error detector
+==22284== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==22284== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==22284== Command: ./main --leak-check=ful
+==22284== 
+Destination 33 not found
+Found destination: 23
+Destination 46 not found
+Found destination: 13
+==22284== 
+==22284== HEAP SUMMARY:
+==22284==     in use at exit: 0 bytes in 0 blocks
+==22284==   total heap usage: 6 allocs, 6 frees, 4,312 bytes allocated
+==22284== 
+==22284== All heap blocks were freed -- no leaks are possible
+==22284== 
+==22284== For lists of detected and suppressed errors, rerun with: -s
+==22284== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

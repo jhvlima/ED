@@ -38,9 +38,9 @@ tArv *buscaEIncrementaArvore(tArv *a, char* palavra)
     {
         return a;
     }
-    if (eIgual(a->palavra.string, palavra))
+    if (eIgual(a->palavra->string, palavra))
     {
-        a->palavra.ocorencia++;
+        a->palavra->ocorencia++;
         return a;
     }
 
@@ -49,9 +49,24 @@ tArv *buscaEIncrementaArvore(tArv *a, char* palavra)
     return a;
 }
 
-void insereArvore(tArv *a, tArv *sub)
+tArv *insereArvore(tArv *a, tPalavra *palavra)
 {
-
+    if (taVazia(a))
+    {
+        tArv *novo = calloc(1, sizeof(tArv));
+        novo->dir = novo->esq = NULL;
+        memcpy(novo->palavra, palavra, sizeof(tPalavra));
+        return novo;
+    }
+    if (a->palavra.ocorencia < palavra->ocorencia)
+    {
+        a->esq = insereArvore(a->esq, palavra);
+    }
+    else
+    {
+        a->dir = insereArvore(a->dir, palavra);
+    }
+    return a;    
 }
 
 void imprimeArvore(tArv *a);
@@ -61,24 +76,84 @@ int palavrasDistintas(tArv *a)
     int soma = 0;
     if (!taVazia(a->dir))
     {
-        soma = +folas(a->dir);
+        soma = +palavrasDistintas(a->dir);
     }
     if (!taVazia(a->esq))
     {
-        soma = +folas(a->esq);
+        soma = +palavrasDistintas(a->esq);
     }
     return soma +1;
 }
 
-int totalOcorrencias(tArv *a);
+int totalOcorrencias(tArv *a)
+{
+    int soma = 0;
+    if (!taVazia(a->dir))
+    {
+        soma = +totalOcorrencias(a->dir);
+    }
+    if (!taVazia(a->esq))
+    {
+        soma = +totalOcorrencias(a->esq);
+    }
+    return soma + obtemOcorrencia(a);
+}
 
-int obtemOcorrencia(tArv *a);
+int obtemOcorrencia(tArv *a)
+{
+    return a->palavra.ocorencia;
+}
 
-char *obtemPalavra(tArv *a);
+char *obtemPalavra(tArv *a)
+{
+    return a->palavra.string;
+}
 
-int maiorOcorrencia(tArv *a);
+int maiorOcorrencia(tArv *a)
+{
+    int atual = 0, dir = 0, esq = 0;
+    if (taVazia(a))
+    {
+        return 0;
+    }
 
-void liberaArvore(tArv *a);
+    atual = obtemOcorrencia(a);
+    
+    if (!taVazia(a->dir))
+    {
+        dir = maiorOcorrencia(a->dir);
+    }
+    if (!taVazia(a->esq))
+    {
+        esq = maiorOcorrencia(a->esq);
+    }
+    
+    if (dir>esq)
+    {
+        if (dir > atual)
+        {
+            return dir;
+        }
+    }
+    else
+    {
+        if (esq > atual)
+        {
+            return esq;
+        }
+    }
+    return atual;
+}
+
+void liberaArvore(tArv *a)
+{
+    if (!taVazia(a))
+    {
+        liberaArvore(a->dir);
+        liberaArvore(a->esq);
+        free(a);
+    }
+}
 
 
 void imprimeVetor(tPalavra *vetor, int tam)
